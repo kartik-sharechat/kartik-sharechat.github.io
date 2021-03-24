@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>COMMET: COntextual Multimodal Multilingual EmoTion Recognition Dataset</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    html {
+        font-size: 16px;
+    }
+
+    @media (min-width: 768px) {
+        html {
+            font-size: 17px;
+        }
+    }
+
+    .container-fluid {
+        max-width: 1360px;
+    }
+
+    html,
+    * {
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    @supports (font-variation-settings: normal) {
+
+        html,
+        * {
+            font-family: 'Inter var', sans-serif !important;
+        }
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+    .authors,
+    .buttons {
+        font-size: 23px;
+        display: flex;
+        justify-content: space-evenly;
+        /*max-width: 600px;*/
+        margin: 0 auto;
+    }
+
+    .authors {
+        max-width: 900px;
+    }
+
+    .buttons {
+        max-width: 500px;
+    }
+
+    .affils {
+        font-size: 1em;
+        color: gray;
+    }
+
+    .teasertext {
+        position: absolute;
+        left: 6.5%;
+        top: 12.5%;
+        width: 36%;
+        font-size: 18px;
+        line-height: 21px;
+    }
+
+    .caption {
+        display: block;
+        width: 350px;
+        font-size: 0.8em;
+    }
+
+    .teaserfig {
+        width: 350px;
+        border-radius: .25rem;
+    }
+
+    .abstract {
+        display: flex;
+    }
+
+    .abstracttext {
+        font-size: 0.95em;
+    }
+
+    .class_mono {
+        font-family: 'courier', monospace !important;
+    }
+
+    pre {
+        font-size: 87.5%;
+        white-space: pre-wrap;
+        color: #e83e8c;
+        max-width: 1360px;
+    }
+
+    .ptgrid {
+        grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+        gap: 10px;
+        /*padding: 10px;*/
+        grid-row-gap: 10px;
+        display: grid;
+        justify-items: center;
+    }
+
+    .ptep {
+        display: grid;
+        padding: 15px;
+        border-radius: .25rem;
+        grid-template-columns: repeat(3, minmax(135px, 1fr)) 1px minmax(135px, 1fr);
+        grid-template-rows: auto auto auto 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 5px;
+        background-color: #f8f9fa !important;
+        max-width: 900px;
+    }
+
+    .ptep img {
+        width: 100%;
+        border-radius: .25rem;
+    }
+
+    .refsetlbl {
+        grid-area: 1 / 1 / 2 / 4;
+        font-weight: bold;
+    }
+
+    .tgtlbl {
+        grid-area: 1 / 5 / 2 / 5;
+        font-weight: bold;
+    }
+
+    .im0 {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+
+    .im1 {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+
+    .im2 {
+        grid-area: 2 / 3 / 3 / 4;
+    }
+
+    .imtgt {
+        grid-area: 2 / 5 / 3 / 5;
+    }
+
+    .txt0 {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+
+    .txt1 {
+        grid-area: 3 / 2 / 4 / 3;
+    }
+
+    .txt2 {
+        grid-area: 3 / 3 / 4 / 4;
+    }
+
+    .txttgt {
+        grid-area: 3 / 5 / 4 / 5;
+    }
+
+    .pred {
+        padding: 2px 0;
+        margin-top: 5px;
+        border-radius: .25rem;
+        display: inline-block;
+    }
+
+    .pred.hover {
+        padding: 2px 4px;
+        background-color: rgb(52, 58, 64);
+        color: #fff;
+        word-break: break-all;
+    }
+
+    .gt {
+        padding: 2px 4px;
+        border: 1px rgb(52, 58, 64) solid;
+        /*color: #fff;*/
+        border-radius: .25rem;
+        display: inline-block;
+        margin-top: 5px;
+        word-break: break-all;
+        transition: all 0.12s ease-in;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+        text-align: center;
+    }
+
+    .gt:hover {
+        background-color: rgba(52, 58, 64, 0.2);
+    }
+
+    .pct {
+        font-size: 0.85em;
+        /*margin-left: 8px;*/
+        /*word-break: break-word;*/
+        word-break: break-word;
+        display: none;
+    }
+
+    .pred.hover .pct {
+        display: inline;
+    }
+
+    .pred.hover .predw {
+        margin-right: 8px;
+    }
+
+    .ptep p {
+        padding: 2px 0;
+        display: inline-block;
+        margin: 0;
+        margin-top: 5px;
+    }
+
+    /*  .gt:hover:after {
+              position: absolute;
+              content: "";
+              height: calc(100% + 100px);
+              top: -50px;
+              left: -100px;
+              right: -100px;
+              !*background-color: rgba(255,0,0,0.5);*!
+          }*/
+
+    @media (max-width: 767px) {
+
+        .abstract {
+            display: block;
+        }
+
+        .teaser {
+            text-align: center;
+        }
+
+        .captioncont {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .figcont {
+            display: inline-block;
+        }
+
+        .abstracttext {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .papercont {
+            padding: 0;
+            text-align: center;
+        }
+
+
+        .papersubcont {
+            display: inline-block !important;
+            text-align: center;
+        }
+
+        .paper {}
+
+        .paperinfo {}
+
+        .ptep {
+            grid-template-columns: repeat(3, minmax(90px, 1fr)) 1px minmax(90px, 1fr);
+        }
+
+        pre {
+            max-width: 350px;
+            text-align: left;
+        }
+
+        .pred {
+            /*word-break: break-word;*/
+            word-break: break-all;
+        }
+
+        .ptgrid {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        .pct {
+            word-break: break-word;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .container-fluid {
+            padding: 0 !important;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid text-dark p-5">
+        <div class="px-3 py-3 pb-md-4 mx-auto text-center">
+            <h2>COMMET: COntextual Multimodal Multilingual EmoTion Recognition Dataset</h2>
+            <div class="authors mt-4">
+                <a href="https://www.didacsuris.com" class="text-danger">Dídac Surís<sup>1</sup></a>
+                <a href="https://dave.ml" class="text-danger">Dave Epstein<sup>2</sup></a>
+                <a href="http://carlvondrick.com" class="text-danger">Carl Vondrick<sup>1</sup></a>
+            </div>
+            <div class="affils mt-1">
+                <sup>1</sup> Sharechat<br />
+                <sup>2</sup> UC Berkeley
+            </div>
+            <div class="buttons mt-4">
+                <a href="https://arxiv.org/abs/2012.04631" class="btn btn-outline-danger">Paper</a>
+                <a href="https://sharechat.com" class="btn btn-outline-danger">Code</a>
+            </div>
+            <div class="mt-4">
+                <div>
+                    <h6>Download</h6>
+                </div>
+                <div class="buttons mt-6">
+                    <a href="dataset.tar.gz" class="btn btn-outline-danger">Dataset</a>
+                    <a href="checkpoints.tar.gz" class="btn btn-outline-danger">Pretrained models</a>
+                    <a href="dataset_info.tar.gz" class="btn btn-outline-danger">Tokenization data</a>
+                </div>
+            </div>
+        </div>
+        <section class="abstract p-3 p-md-4 mt-4">
+            <div class="teaser p-3 p-md-2">
+                <div style="position: relative" class="figcont">
+                    <img src="teaser.png" class="teaserfig" alt="Teaser figure" />
+                </div>
+                <div class="captioncont">
+                    <span class="caption mt-3">While each language represents a bicycle with a different word, the underlying visual representations remains consistent. A bicycle has similar appearance in the UK, France, Japan and India. We leverage this natural property to learn models of machine translation across multiple languages without paired training corpora.
+                    </span>
+                </div>
+            </div>
+            <div class="abstracttext p-3 p-md-0 pl-md-4" style="margin-top: 1.5cm">
+                <p>Understanding sentiments and emotions expressed in videos forms an important part of human-focussed video understanding and crucial for developing emotionally aware HCI systems. This is an extremely challenging task because emotions are not only conveyed through the facial expressions but also through the action s, spoken words, voice modulation, background music, environmental settings as well as the textual information present in videos. Moreover, depending upon the ethnicity, audio cues can be in different languages. This multimodal and multilingual nature makes this an extremely challenging problem.Existing multimodal emotion recognition datasets do not represent the in-the-wild scenarios as they have been collected under controlled studio settings with only one speaker and monolingual audio. Moreover, these datasets capture restricted human body motions and do not cover scenarios where emotions are expressed by non-animate components like text embedded in the video, background scenery, music etc.</p>
+                <p>ShareChat, would like to propose a "regular competition" which will run over the next [X] months. We are releasing an in-the-wild dataset of [Y] short videos created by our users on our short video platform Moj. These videos are classified into [Z] different classes of sentiments and emotions by our team of expert annotators. Our dataset has zero/single/multi person videos created by our users under challenging environmental conditions spanning different languages and background music. The videos have been created by users with varying editing expertise, using different kinds of cameras and lightning conditions, which makes this dataset extremely challenging and close to real life scenarios. We sincerely hope that our in-the-wild dataset would encourage research and development in emotion understanding under challenging real life scenarios. The learnings would help in making social media platforms emotionally aware and safer. We believe that understanding the emotions expressed in videos can be instrumental in understanding the emotional health of social media users and can help in identifying bullying, depression and other issues related to mental and emotional health.</p>
+            </div>
+        </section>
+        <section class="paper p-3 p-md-4 mt-4">
+            <h4>Data Statistics</h4>
+            <ul>
+                <li> <b><i>Size and variety:</i></b><br>
+                    CMU-MOSEI contains 23,500 video segments extracted from 3228 videos. This restricts the environmental variations captured by the dataset. On the contrary, the [Y] videos of our dataset are completely independent and thus each video presents with it a completely different set of background, lighting and audio situations.
+                </li>
+                <li> <b><i>Audio diversity:</i></b><br>
+                    CMU-MOSEI consists of monologues recorded by Youtube users while our dataset has a mixture as well as interplay of spoken words as well as background music and songs.</li>
+                <li> <b><i>Speaker diversity:</i></b><br>
+                    The number of speakers [N] in our dataset is much higher than 1000 speakers in CMU-MOSEI dataset which would prevent the models in associating emotions to faces.
+                <li> <b><i>Multispeaker:</i></b><br>
+                    CMU-MOSEI is a single speaker dataset while our dataset can have more than one speakers. This allows for modelling richer human interactions in the context of emotion understanding. Moreover, some of our videos do not have humans which creates a challenging problem of understanding emotions from the visual and audio content.
+                <li> <b><i>Multilingual:</i></b><br>
+                    Our dataset is multilingual with content in different languages which presents an interesting challenge of multi-lingual emotion recognition.
+                <li> <b><i>Gesture diversity:</i></b><br>
+                    In CMU-MOSEI dataset, the speakers position themselves closer to the camera, thus exhibiting limited body motions and gestures. However, our dataset provides a wide range of human body motions and gestures and thus allows for studying correlation between human body motions and emotions.
+                <li> <b><i>Diverse content quality:</i></b><br>
+                    The videos have been created by both expert and amateur content creators with varying editing expertise, using different kinds of cameras which makes this dataset rich in terms of variety of content quality.
+        </ul>
+            <div style="text-align:center;margin: 10px 0;"><a href="https://sharechat.com" class="mx-auto"><img src="assets/images/train_dist.png" width="350px"></a><a href="https://sharechat.com" class="mx-auto"><img src="assets/images/test_dist.png" width="350px"></a><a href="https://sharechat.com" class="mx-auto"><img src="assets/images/conf.png" width="300px"></a><br>
+                <!-- <a class="btn btn-outline-secondary mt-2" href="https://github.com/cvlab-columbia/expert">Github code and pretrained models</a></div> -->
+        </section>
+        <section class="paper p-3 p-md-4 mt-4">
+            <h4>Paper</h4>
+            <div class="mw-100 col-md-9 mx-auto papercont mt-md-0 mt-4">
+                <div style="display: flex" class="papersubcont">
+                    <a href="https://arxiv.org/pdf/2012.04631.pdf"><img src="thumb.jpg" width="400px"></a>
+                    <div class="ml-md-4 mt-4 mt-md-0 paperinfo" style="display: flex; flex-direction: column; justify-content: center">
+                        <div>
+                            <a href="https://arxiv.org/pdf/2012.04631.pdf" class="mr-3 btn btn-outline-secondary">PDF</a>
+                        </div>
+                        <div class="mt-2">
+                            <pre class="class_mono">
+                                @article{suris2020globetrotter,
+                                    title={Globetrotter: Unsupervised Multilingual Translation from Visual Alignment},
+                                    author={Sur\'is, D\'idac and Epstein, Dave and Vondrick, Carl},
+                                    journal={arXiv preprint arXiv:2012.04631},
+                                    year={2020}
+                                }
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="paper p-3 p-md-4 mt-4">
+            <h4>Approach</h4>
+            Our model learns an aligned embedding space for language translation by leveraging a transitive relation through vision. Cross-sentence similarity β<sub>ij</sub> is estimated by the path through an image collection. Our approach learns this path by using both cross-modal (text-image) and visual similarity metrics. We do not use any paired data across languages.
+            <div style="text-align:center;margin: 20px 0;"><a href="https://sharechat.com" class="mx-auto"><img src="architecture.png" width="550px"></a><br>
+                <!-- <a class="btn btn-outline-secondary mt-2" href="https://github.com/cvlab-columbia/expert">Github code and pretrained models</a></div> -->
+        </section>
+        <section class="paper p-3 p-md-4 mt-4">
+            <h4>Code, data and pretrained models</h4>
+            For this project we collected a dataset of image descriptions for 52 different languages. The training set contains descriptions of images that do not overlap across languages, and the testing set contains descriptions for the same images for all the languages.
+            We release our code, dataset and pretrained models. Please check <a href="https://sharechat.com">our Github project</a> for more information.
+        </section>
+        <section class="paper p-3 p-md-4 mt-4">
+            <h5>Acknowledgements</h5>
+            <p><small>This research is based on work partially supported by the ... We thank NVidia for GPU donations. The webpage template was inspired by <a href="https://richzhang.github.io/colorization/">this project page<small></a>.
+            </p>
+        </section>
+    </div>
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script>
+    function RGBA(e, alpha) { //e = jQuery element, alpha = background-opacity
+        b = e.css('backgroundColor');
+        e.css('backgroundColor', 'rgba' + b.slice(b.indexOf('('), ((b.match(/,/g).length == 2) ? -1 : b.lastIndexOf(',') - b.length)) + ', ' + alpha + ')');
+    }
+
+
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#firstgt').tooltip('show').on('hidden.bs.tooltip', function() {
+            $(this).tooltip('dispose');
+        });
+        $('.gt').mouseenter(function(e) {
+            $('#firstgt').tooltip('hide');
+            $(this).closest('.ptep').find('.gt').each(function() {
+                $(this).text($(this).attr('data-gt'));
+            });
+            $(this).closest('.ptep').find('.pred').addClass('hover').each(function() {
+                var a = $(this).find('.pct').text().slice(0, -1) / 100;
+                RGBA($(this), a);
+                if (a < 0.2) {
+                    $(this).css('color', 'rgb(52, 58, 64)')
+                }
+            });
+        }).mouseleave(function(e) {
+            $(this).closest('.ptep').find('.gt').each(function() {
+                $(this).text('MASK');
+            });
+            $(this).closest('.ptep').find('.pred').removeClass('hover').each(function() {
+                $(this).css('color', '');
+                $(this).css('backgroundColor', '');
+            });
+        });
+
+    })
+    </script>
+</body>
+
+</html>
